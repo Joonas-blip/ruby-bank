@@ -1,0 +1,6 @@
+
+
+<% @bank_accounts.each do |account| %>
+  <p>Account: <%= account.account_number %>  Balance: <%= account.balance %></p>
+  <p><%= link_to 'show details', bank_account_transactions_path(account) %> </p>
+<% end %>

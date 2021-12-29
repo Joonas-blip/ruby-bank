@@ -1,0 +1,5 @@
+
+<% @transactions.each do |transaction| %>
+  <p>Created: <%= transaction.created_at %>  transaction: <%= transaction.transaction_number %> type: <%= transaction.transaction_type %> from: <%= transaction.sending_acoount %> to: from: <%= transaction.receiving_acoount %></p>
+  <p><%= link_to 'show details', bank_account_transactions_path(account) %> </p>
+<% end %>
