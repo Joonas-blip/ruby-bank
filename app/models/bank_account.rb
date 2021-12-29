@@ -3,11 +3,12 @@ class BankAccount < ApplicationRecord
   belongs_to :user
   has_many :transactions
   validates :account_number, presence: true, uniqueness: true
+  validates :balance, numericality: { greater_than_or_equal_to: 0 }
   validates :user, presence: true
 
   def set_default_balance
     if self.new_record?
-      self.balance = 0.00
+      self.balance = 0.00 unless user.admin
     end
   end
 
