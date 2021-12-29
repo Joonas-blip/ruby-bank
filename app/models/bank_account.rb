@@ -2,7 +2,7 @@ class BankAccount < ApplicationRecord
   before_validation :set_default_balance, :new_account_number
   belongs_to :user
   has_many :transactions
-  validates :account_number, presence: true, uniqieness: true
+  validates :account_number, presence: true, uniqueness: true
   validates :user, presence: true
 
   def set_default_balance

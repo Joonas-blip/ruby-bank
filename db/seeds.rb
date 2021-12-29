@@ -10,10 +10,17 @@
 User.destroy_all
 BankAccount.destroy_all
 
-user_1 = User.create(email: 'User1@mail.com', password: '123456', full_name: 'John Doe')
-user_2 =User.create(email: 'User2@mail.com', password: '123456', full_name: 'Andrea Corbetta')
-admin = User.create(email: 'admin@mail.com',  password: '123456', full_name: 'Davide Oldani', admin: true)
+puts 'create users'
+user_1 = User.new(email: 'User1@mail.com', password: '123456', full_name: 'John Doe')
+user_1.save
+user_2 =User.new(email: 'User2@mail.com', password: '123456', full_name: 'Andrea Corbetta')
+user_2.save
+admin = User.new(email: 'admin@mail.com',  password: '123456', full_name: 'Davide Oldani', admin: true)
+admin.save
+puts 'users created'
 
-BankAccount.create(user: user_1, account_number: 'NL01RUBY9243483368')
-BankAccount.create(user: user_2, account_number: 'NL01RUBY7339065790')
-BankAccount.create(user: admin, account_number: 'NL01RUBY0000000000')
+puts 'create bank accounts'
+BankAccount.create(user: user_1)
+BankAccount.create(user: user_2)
+BankAccount.create(user: admin)
+puts 'Bank accounts created'
