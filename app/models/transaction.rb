@@ -5,6 +5,7 @@ class Transaction < ApplicationRecord
   validates :amount, presence: true, numericality: true
   validates :transaction_number, presence: true, uniqueness: true
   validates :transaction_type, presence: true, inclusion: { in: TRANSACTION_TYPES }
+  validates :sending_account, uniqueness: { scope: [:receiving_account] }
 
   def set_transaction_number
     self.transaction_number = SecureRandom.uuid
