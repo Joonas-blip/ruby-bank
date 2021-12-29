@@ -9,9 +9,10 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    raise
+    unless current_account.balance >= transaction_params['amount'].to_f
+      flash.now[:alert] = "No balance"
+    end
 
-    unless current_account.balance >= transaction_params['amount']
   end
 
   def current_account
