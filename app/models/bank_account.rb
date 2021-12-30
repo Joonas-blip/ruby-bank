@@ -18,4 +18,8 @@ class BankAccount < ApplicationRecord
       self.account_number = "NL01RUBY#{10.times.map{rand(10)}.join}"
     end
   end
+
+  def sufficient_balance?(amount)
+    self.balance >= amount
+  end
 end

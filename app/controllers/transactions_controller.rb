@@ -4,23 +4,23 @@ class TransactionsController < ApplicationController
 
   def index
     @transactions = Transaction.where("sender_id = #{@account.id} OR receiver_id = #{@account.id}")
-    # BankAccount.first.transactions
     @transaction = Transaction.new
   end
 
   def create
-    unless @account.balance >= transaction_params['amount'].to_f
-      redirect_to bank_account_transactions_path(@account)
-      flash[:alert] = "Not enough balance"
-    end
-    new_transaction = Transaction.new(sender_id: @account.id, receiver_id: BankAccount.find_by(account_number: transaction_params['receiver']).id, amount: transaction_params['amount'].to_f)
-    if new_transaction.valid?
-      new_transaction.save
+    if @account.sufficient_balance?(transaction_params['amount'].to_f)
+      if BankAccount.exists?(account_number: transaction_params['receiver'])
+        new_transaction = Transaction.new(sender_id: @account.id, receiver_id: BankAccount.find_by(account_number: transaction_params['receiver']).id, amount: transaction_params['amount'].to_f)
+        new_transaction.valid? ? new_transaction.save : error('other')
+      else
+        error('nonexistent')
+      end
     else
-      redirect_to bank_account_transactions_path(@account)
-      flash[:alert] = "Something went wrong - please try again"
+      error('balance')
     end
   end
+
+  private
 
   def set_account
     @account = BankAccount.find(params[:bank_account_id])
@@ -37,4 +37,16 @@ class TransactionsController < ApplicationController
     params.require(:transaction).permit(:receiver, :amount)
   end
 
+  def error(reason)
+    if reason == 'balance'
+      redirect_to bank_account_transactions_path(@account)
+      flash[:alert] = "Not enough Balance"
+    elsif reason == 'nonexistent'
+      redirect_to bank_account_transactions_path(@account)
+      flash[:alert] = "Bank account does not exist"
+    else
+      redirect_to bank_account_transactions_path(@account)
+      flash[:alert] = "Something went wrong - please try again"
+    end
+  end
 end
