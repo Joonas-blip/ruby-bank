@@ -19,7 +19,7 @@
     <th>OUT</th>
     <th>from/to</th>
   </tr>
-  <% @transactions.each do |transaction| %>
+  <% @transactions.reverse.each do |transaction| %>
   <tr>
     <td><%= transaction.created_at %></td>
     <td><%= transaction.transaction_number %></td>

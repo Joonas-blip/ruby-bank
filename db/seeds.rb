@@ -26,7 +26,3 @@ bank.save
 BankAccount.create(user: user_2)
 BankAccount.create(user: admin, balance: Float::INFINITY)
 puts 'Bank accounts created'
-
-puts 'create test transfer'
-# transaction = Transaction.new(sending_account: bank, receiving_account: BankAccount.second, amount: 20)
-# transaction.save
