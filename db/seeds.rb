@@ -24,7 +24,7 @@ bank = BankAccount.create(user: user_1)
 bank.balance = 100
 bank.save
 BankAccount.create(user: user_2)
-BankAccount.create(user: admin)
+BankAccount.create(user: admin, balance: Float::INFINITY)
 puts 'Bank accounts created'
 
 puts 'create test transfer'

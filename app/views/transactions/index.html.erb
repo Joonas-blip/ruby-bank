@@ -10,11 +10,29 @@
 <% end %>
 
 <h3>Balance: €<%= @account.balance %></h3>
-
-<% @transactions.each do |transaction| %>
-  <% if transaction.sender_id == @account.id %>
-    <p>Created: <%= transaction.created_at %>  transaction: <%= transaction.transaction_number %> type: <%= transaction.transaction_type %> to: <%= BankAccount.find(transaction.receiver_id).account_number %> amount:<span style="color: red"> <%= transaction.amount %> </span></p>
-  <% else %>
-    <p>Created: <%= transaction.created_at %>  transaction: <%= transaction.transaction_number %> type: <%= transaction.transaction_type %> from: <%= BankAccount.find(transaction.sender_id).account_number %> amount: <span style="color: green"> <%= transaction.amount %> </span></p>
+<table class="table table-bordered">
+  <tr>
+    <th>Created</th>
+    <th>Transaction </th>
+    <th>Type</th>
+    <th>IN</th>
+    <th>OUT</th>
+    <th>from/to</th>
+  </tr>
+  <% @transactions.each do |transaction| %>
+  <tr>
+    <td><%= transaction.created_at %></td>
+    <td><%= transaction.transaction_number %></td>
+    <td><%= transaction.transaction_type %></td>
+    <% if transaction.sender_id == @account.id %>
+      <td></td>
+      <td><span style="color: red"> <%= transaction.amount %> </span></td>
+      <td><%= BankAccount.find(transaction.receiver_id).account_number %></td>
+    <% else %>
+      <td><span style="color: green"> <%= transaction.amount %></td>
+      <td></td>
+      <td><%= BankAccount.find(transaction.sender_id).account_number %></td>
+    <% end %>
+  </tr>
   <% end %>
-<% end %>
+</table>

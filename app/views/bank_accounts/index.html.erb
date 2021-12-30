@@ -1,6 +1,18 @@
 
+<h1>Welcome Back <%= @current_user.full_name %></h1>
 
-<% @bank_accounts.each do |account| %>
-  <p>Account: <%= account.account_number %>  Balance: <%= account.balance %></p>
-  <p><%= link_to 'show details', bank_account_transactions_path(account) %> </p>
-<% end %>
+<h3>Choose an account</h3>
+<table class="table table-bordered">
+  <tr>
+    <th>Account</th>
+    <th>Balance</th>
+    <th></th>
+  </tr>
+  <% @bank_accounts.each do |account| %>
+  <tr>
+    <td><%= account.account_number %></td>
+    <td>€ <%= account.balance %></td>
+    <td><%= link_to 'show details', bank_account_transactions_path(account) %> </td>
+  </tr>
+  <% end %>
+</table>
