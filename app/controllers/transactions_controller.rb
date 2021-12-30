@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @transactions = Transaction.where("sending_account = #{@account.id} OR receiving_account = #{@account.id}")
+    @transactions = Transaction.where("sender_id = #{@account.id} OR receiver_id = #{@account.id}")
     # BankAccount.first.transactions
     @transaction = Transaction.new
   end
@@ -13,9 +13,7 @@ class TransactionsController < ApplicationController
       redirect_to bank_account_transactions_path(@account)
       flash[:alert] = "Not enough balance"
     end
-
-    new_transaction = Transaction.new(sending_account: @account.id, receiving_account: BankAccount.find_by(account_number: transaction_params['receiving_account']).id, amount: transaction_params['amount'].to_f)
-    raise
+    new_transaction = Transaction.new(sender_id: @account.id, receiver_id: BankAccount.find_by(account_number: transaction_params['receiver']).id, amount: transaction_params['amount'].to_f)
     if new_transaction.valid?
       new_transaction.save
     else
@@ -36,7 +34,7 @@ class TransactionsController < ApplicationController
   end
 
   def transaction_params
-    params.require(:transaction).permit(:receiving_account, :amount)
+    params.require(:transaction).permit(:receiver, :amount)
   end
 
 end
