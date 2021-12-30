@@ -1,7 +1,8 @@
 class BankAccount < ApplicationRecord
   before_validation :set_default_balance, :new_account_number
   belongs_to :user
-  has_many :transactions
+  has_many :transactions_as_sender, class_name: "Transaction", foreign_key: :sender_id
+  has_many :transactions_as_receiver, class_name: "Transaction", foreign_key: :receiver_id
   validates :account_number, presence: true, uniqueness: true
   validates :balance, numericality: { greater_than_or_equal_to: 0 }
   validates :user, presence: true

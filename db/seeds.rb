@@ -20,7 +20,13 @@ admin.save
 puts 'users created'
 
 puts 'create bank accounts'
-BankAccount.create(user: user_1)
+bank = BankAccount.create(user: user_1)
+bank.balance = 100
+bank.save
 BankAccount.create(user: user_2)
 BankAccount.create(user: admin)
 puts 'Bank accounts created'
+
+puts 'create test transfer'
+# transaction = Transaction.new(sending_account: bank, receiving_account: BankAccount.second, amount: 20)
+# transaction.save

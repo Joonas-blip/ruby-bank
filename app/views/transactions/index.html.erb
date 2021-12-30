@@ -2,7 +2,7 @@
 <%= simple_form_for @transaction, url: bank_account_transactions_path, method: :post do |f| %>
   <div class="formdevise">
     <br>
-    <%= f.input :receiving_account, as: :string, placeholder: 'Enter an Account Number'%>
+    <%= f.input :receiving_account, as: :string, placeholder: 'Enter an Account Number', required: true%>
     <%= f.input :amount, as: :float, placeholder: 'Enter an Amount'%>
     <%= hidden_field_tag "format", @account.id %>
     <%= f.button :submit, class: "button-large"%>

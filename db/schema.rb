@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 2021_12_29_093522) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "sending_account"
-    t.integer "receiving_account"
+    t.integer "sender_id"
+    t.integer "receiver_id"
     t.float "amount"
     t.string "transaction_number"
     t.datetime "created_at", precision: 6, null: false
@@ -49,6 +49,6 @@ ActiveRecord::Schema.define(version: 2021_12_29_093522) do
   end
 
   add_foreign_key "bank_accounts", "users"
-  add_foreign_key "transactions", "bank_accounts", column: "receiving_account"
-  add_foreign_key "transactions", "bank_accounts", column: "sending_account"
+  add_foreign_key "transactions", "bank_accounts", column: "receiver_id"
+  add_foreign_key "transactions", "bank_accounts", column: "sender_id"
 end
