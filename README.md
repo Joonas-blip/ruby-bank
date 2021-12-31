@@ -64,7 +64,7 @@ rails serve
 
 <h3> Still in the oven... </h3>
 <ul>
-  <li>Refactoring commonly used code blocks into service classes/li>
+  <li>Refactoring commonly used code blocks into service classes</li>
   <li>Control the way accounts can be created by users</li>
   <li>Increase powers of the Admin eg. Management of users, management of accounts, blocking of accounts</li>
   <li>Increase powers of the Admin eg. Management of users, management of accounts, blocking of accounts</li>
