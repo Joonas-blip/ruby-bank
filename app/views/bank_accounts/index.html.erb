@@ -1,6 +1,8 @@
 
 <h1>Welcome Back <%= @current_user.full_name %></h1>
 
+<%= link_to 'show details', bank_accounts_path, class: "btn btn-secondary", method: 'post' %>
+
 <h3>Choose an account</h3>
 <table class="table table-bordered">
   <tr>
