@@ -44,7 +44,7 @@
   </tr>
 </table>
 
-<p> For testing the above users can be used. The bank account numbers of the respective users can be found using the console after seeding the database.</p>
+<p> For testing the above users can be used. The bank account numbers of the respective users can be found using the console after seeding the database. User bank account numbers can also be found through the admin portal at route "/admin".</p>
 
 <h3>Database design</h3>
 <img src="https://user-images.githubusercontent.com/64923657/147818963-e044b66d-fae6-496a-8287-41d6f0b1ee2b.png">
