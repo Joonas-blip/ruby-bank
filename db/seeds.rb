@@ -7,8 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # destroy all users
-User.destroy_all
+Transaction.destroy_all
 BankAccount.destroy_all
+User.destroy_all
 
 puts 'create users'
 user_1 = User.new(email: 'User1@mail.com', password: '123456', full_name: 'John Doe')
@@ -21,8 +22,19 @@ puts 'users created'
 
 puts 'create bank accounts'
 bank = BankAccount.create(user: user_1)
-bank.balance = 100
 bank.save
 BankAccount.create(user: user_2)
 BankAccount.create(user: admin, balance: Float::INFINITY)
 puts 'Bank accounts created'
+
+puts 'Create transactions'
+deposit = Transaction.new(sender_id: BankAccount.third.id, receiver_id: BankAccount.first.id, amount: 100, transaction_type: 'deposit')
+deposit.save
+3.times do
+  transaction1 = Transaction.new(sender_id: BankAccount.first.id, receiver_id: BankAccount.second.id, amount: 10)
+  transaction1.save
+  transaction1 = Transaction.new(sender_id: BankAccount.second.id, receiver_id: BankAccount.first.id, amount: 10)
+  transaction1.save
+  sleep(5)
+end
+puts 'Transactions created'
