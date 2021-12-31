@@ -46,12 +46,15 @@
 <p> For testing the above users can be used. The bank account numbers of the respective users can be found using the console after seeding the database.</p>
 
 <p> to start run</p>
-```
+
+```ruby
 bundle install
 rails db:create db:migrate db:seed
 ```
+
 <p> run rails server</p>
-```
+
+```ruby
 rails serve
 ```
 
