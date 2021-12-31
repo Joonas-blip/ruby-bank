@@ -13,9 +13,9 @@ BankAccount.destroy_all
 puts 'create users'
 user_1 = User.new(email: 'User1@mail.com', password: '123456', full_name: 'John Doe')
 user_1.save
-user_2 =User.new(email: 'User2@mail.com', password: '123456', full_name: 'Andrea Corbetta')
+user_2 =User.new(email: 'User2@mail.com', password: '123456', full_name: 'Davide Oldani')
 user_2.save
-admin = User.new(email: 'admin@mail.com',  password: '123456', full_name: 'Davide Oldani', admin: true)
+admin = User.new(email: 'admin@mail.com',  password: '123456', full_name: 'BANK ADMIN', admin: true)
 admin.save
 puts 'users created'
 

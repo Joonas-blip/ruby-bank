@@ -4,7 +4,7 @@
     <br>
     <%= f.input :receiver, as: :string, placeholder: 'Enter an Account Number', required: true%>
     <%= f.input :amount, as: :float, placeholder: 'Enter an Amount'%>
-    <%= hidden_field_tag "format", @account.id %>
+    <%= hidden_field_tag "type", 'deposit' %>
     <%= f.button :submit, class: "btn btn-secondary"%>
   </div>
 <% end %>

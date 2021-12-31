@@ -1,0 +1,50 @@
+<h3>Create Deposit</h3>
+<%= simple_form_for @transaction, url: admin_path, method: :post do |f| %>
+  <div class="formdevise">
+    <br>
+    <%= f.input :receiver, as: :string, placeholder: 'Enter an Account Number', required: true%>
+    <%= f.input :amount, as: :float, placeholder: 'Enter an Amount'%>
+    <%= hidden_field_tag "type", 'deposit' %>
+    <%= f.button :submit, class: "btn btn-secondary"%>
+  </div>
+<% end %>
+<br>
+<br>
+<h3>All accounts</h3>
+<table class="table table-bordered">
+  <tr>
+    <th>Owner</th>
+    <th>Account</th>
+    <th>Balance</th>
+  </tr>
+  <% @bank_accounts.each do |account| %>
+  <tr>
+    <td><%= account.user.full_name%> </td>
+    <td><%= account.account_number %></td>
+    <td>€ <%= account.balance %></td>
+  </tr>
+  <% end %>
+</table>
+<br>
+<br>
+<h3>All Transactions</h3>
+<table class="table table-bordered">
+  <tr>
+    <th>Created</th>
+    <th>Transaction </th>
+    <th>Type</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Amount</th>
+  </tr>
+  <% @transactions.reverse.each do |transaction| %>
+  <tr>
+    <td><%= transaction.created_at %></td>
+    <td><%= transaction.transaction_number %></td>
+    <td><%= transaction.transaction_type %></td>
+    <td><%=BankAccount.find(transaction.sender_id).account_number%></td>
+    <td><%=BankAccount.find(transaction.receiver_id).account_number %></td>
+    <td><%= transaction.amount %></td>
+  </tr>
+  <% end %>
+</table>
